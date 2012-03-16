@@ -11,28 +11,44 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120316131545) do
+ActiveRecord::Schema.define(:version => 20120316142614) do
+
+  create_table "auditoriums", :id => false, :force => true do |t|
+    t.integer "id",                                  :null => false
+    t.integer "theatre_id",                          :null => false
+    t.string  "auditorium_identifier", :limit => 64, :null => false
+    t.integer "seats_available",                     :null => false
+  end
+
+  add_index "auditoriums", ["theatre_id", "auditorium_identifier"], :name => "auditoriums_theatre_id_auditorium_identifier_key", :unique => true
+  add_index "auditoriums", ["theatre_id"], :name => "auditoriums_theatres_id_idx"
 
   create_table "movie_showtimes", :id => false, :force => true do |t|
-    t.integer  "id",                       :null => false
-    t.integer  "movie_id",                 :null => false
-    t.integer  "theatre_id",               :null => false
-    t.string   "auditorium", :limit => 16, :null => false
-    t.datetime "start_time",               :null => false
+    t.integer  "id",            :null => false
+    t.integer  "movie_id",      :null => false
+    t.datetime "start_time",    :null => false
+    t.integer  "auditorium_id", :null => false
   end
 
   add_index "movie_showtimes", ["movie_id"], :name => "movie_showtimes_movie_id_idx"
   add_index "movie_showtimes", ["start_time"], :name => "movie_showtimes_start_time_idx"
-  add_index "movie_showtimes", ["theatre_id"], :name => "movie_showtimes_theatre_id_idx"
 
   create_table "movies", :id => false, :force => true do |t|
     t.integer "id",                            :null => false
     t.string  "name",           :limit => 256, :null => false
     t.integer "length_minutes",                :null => false
-    t.string  "rating",         :limit => 8,   :null => false
+    t.integer "rating_id",                     :null => false
   end
 
   add_index "movies", ["name"], :name => "movies_name_key", :unique => true
+
+  create_table "ratings", :id => false, :force => true do |t|
+    t.integer "id",                        :null => false
+    t.string  "name",        :limit => 16, :null => false
+    t.text    "description"
+  end
+
+  add_index "ratings", ["name"], :name => "ratings_name_key", :unique => true
 
   create_table "theatres", :id => false, :force => true do |t|
     t.integer "id",                              :null => false
