@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120316142614) do
+ActiveRecord::Schema.define(:version => 20120316150351) do
+
+  create_table "addresses", :id => false, :force => true do |t|
+    t.string "line_1",                      :null => false
+    t.string "line_2"
+    t.string "city",         :limit => 127, :null => false
+    t.string "state",        :limit => 2,   :null => false
+    t.string "zip_code",     :limit => 9,   :null => false
+    t.string "phone_number", :limit => 10,  :null => false
+  end
 
   create_table "auditoriums", :id => false, :force => true do |t|
     t.integer "id",                                  :null => false
@@ -51,16 +60,20 @@ ActiveRecord::Schema.define(:version => 20120316142614) do
   add_index "ratings", ["name"], :name => "ratings_name_key", :unique => true
 
   create_table "theatres", :id => false, :force => true do |t|
-    t.integer "id",                              :null => false
-    t.string  "name",             :limit => 256
-    t.string  "address_line_1",   :limit => 256
-    t.string  "address_line_2",   :limit => 256
-    t.string  "address_city",     :limit => 128
-    t.string  "address_state",    :limit => 2
-    t.string  "address_zip_code", :limit => 9
-    t.string  "phone_number",     :limit => 10
+    t.string  "line_1",                      :null => false
+    t.string  "line_2"
+    t.string  "city",         :limit => 127, :null => false
+    t.string  "state",        :limit => 2,   :null => false
+    t.string  "zip_code",     :limit => 9,   :null => false
+    t.string  "phone_number", :limit => 10,  :null => false
+    t.integer "id",                          :null => false
+    t.string  "name",                        :null => false
   end
 
-  add_index "theatres", ["address_zip_code"], :name => "theatres_address_zip_code_idx"
+  add_index "theatres", ["name"], :name => "theatres_name_key", :unique => true
+
+  create_table "zip_codes", :id => false, :force => true do |t|
+    t.string "zip", :limit => 16, :null => false
+  end
 
 end
