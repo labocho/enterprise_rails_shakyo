@@ -33,12 +33,12 @@ describe Movie do
 
     [nil, 0, -10].each do |v|
       it "length が #{v.inspect} なら raise" do
-        movie = Movie.make(length_minutes: v)    
+        movie = Movie.make(length_minutes: v)
         expect{ movie.save!(validate: false) }.to raise_db_error
       end
     end
   end
-  
+
   describe "validations" do
     [nil, ""].each do |v|
       it "name が #{v.inspect} なら invalid" do
@@ -46,21 +46,21 @@ describe Movie do
         movie.should be_invalid_for :name
       end
     end
-    
+
     it "name が重複していたら invalid" do
       movie = Movie.make
       movie_dup = Movie.make(name: movie.name)
       movie.save!(validate: false)
       movie_dup.should be_invalid_for :name
     end
-    
+
     [nil, "Unexpected"].each do |v|
       it "rating が #{v.inspect} なら invalid" do
         movie = Movie.make(rating: v)
         movie.should be_invalid_for :rating
       end
     end
-    
+
     [nil, 0, -10].each do |v|
       it "length_minutes が #{v.inspect} なら invalid" do
         movie = Movie.make(length_minutes: v)

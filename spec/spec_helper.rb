@@ -26,7 +26,7 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
-  
+
   Machinist.configure do |config|
     config.cache_objects = false
   end

@@ -22,4 +22,3 @@ Theatre.blueprint do
   phone_number { "5555555555" }
 end
 
-

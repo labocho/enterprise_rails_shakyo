@@ -15,7 +15,7 @@ class CreateMovies < ActiveRecord::Migration
       );
     SQL
   end
-  
+
   def down
     execute <<-SQL
       drop table movies;
