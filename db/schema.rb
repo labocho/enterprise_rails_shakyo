@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120220123318) do
+ActiveRecord::Schema.define(:version => 20120316131545) do
 
   create_table "movie_showtimes", :id => false, :force => true do |t|
     t.integer  "id",                       :null => false
@@ -20,6 +20,10 @@ ActiveRecord::Schema.define(:version => 20120220123318) do
     t.string   "auditorium", :limit => 16, :null => false
     t.datetime "start_time",               :null => false
   end
+
+  add_index "movie_showtimes", ["movie_id"], :name => "movie_showtimes_movie_id_idx"
+  add_index "movie_showtimes", ["start_time"], :name => "movie_showtimes_start_time_idx"
+  add_index "movie_showtimes", ["theatre_id"], :name => "movie_showtimes_theatre_id_idx"
 
   create_table "movies", :id => false, :force => true do |t|
     t.integer "id",                            :null => false
@@ -40,5 +44,7 @@ ActiveRecord::Schema.define(:version => 20120220123318) do
     t.string  "address_zip_code", :limit => 9
     t.string  "phone_number",     :limit => 10
   end
+
+  add_index "theatres", ["address_zip_code"], :name => "theatres_address_zip_code_idx"
 
 end
