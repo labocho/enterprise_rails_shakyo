@@ -15,10 +15,10 @@ ActiveRecord::Schema.define(:version => 20120220123318) do
 
   create_table "movie_showtimes", :id => false, :force => true do |t|
     t.integer  "id",                       :null => false
-    t.integer  "movie_id"
-    t.integer  "theatre_id"
-    t.string   "auditorium", :limit => 16
-    t.datetime "start_time"
+    t.integer  "movie_id",                 :null => false
+    t.integer  "theatre_id",               :null => false
+    t.string   "auditorium", :limit => 16, :null => false
+    t.datetime "start_time",               :null => false
   end
 
   create_table "movies", :id => false, :force => true do |t|

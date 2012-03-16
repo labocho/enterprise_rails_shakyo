@@ -3,7 +3,8 @@ class CreateTheatres < ActiveRecord::Migration
     execute <<-SQL
       create sequence theatres_id_seq;
       create table theatres (
-        id integer,
+        id integer
+          default nextval('theatres_id_seq'),
         name varchar(256),
         address_line_1 varchar(256),
         address_line_2 varchar(256),
@@ -15,7 +16,7 @@ class CreateTheatres < ActiveRecord::Migration
       );
     SQL
   end
-  
+
   def down
     execute <<-SQL
       drop table theatres;
