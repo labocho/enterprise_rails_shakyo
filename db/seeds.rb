@@ -5,3 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+[ ["G", "General audiences"],
+  ["PG", "Parental guidance suggested"],
+  ["PG-13", "Parents strongly cautioned"],
+  ["R", "Restricted"],
+  ["NC-17", "No one under 17 admitted"],
+  ["Unrated", "This movie has not been rated"]
+].each do |name, description|
+  rating = Rating.find_by_name(name) || Rating.new(name: name)
+  rating.description = description
+  rating.save!
+end
+
