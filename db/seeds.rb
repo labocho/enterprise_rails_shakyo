@@ -18,3 +18,19 @@
   rating.save!
 end
 
+[ ["02139", "CAMBRIDGE", "MA", "MIDDLESEX", BigDecimal("0.42365079E2", 12), BigDecimal("-0.71104519E2", 12)],
+  ["02445", "BROOKLINE", "MA", "MIDDLESEX", BigDecimal("0.42329300E2", 12), BigDecimal("-0.71131200E2", 12)],
+  # ...
+].each do |zip, city, state_abbr, country, lat, long|
+  zip_code = ZipCode.find_by_zip(zip) || ZipCode.new
+  zip_code.zip = zip
+  zip_code.attributes = {
+    city: city,
+    state_abbreviation: state_abbr,
+    country: country,
+    latitude: lat,
+    longitude: long
+  }
+  zip_code.save!
+end
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120316160813) do
+ActiveRecord::Schema.define(:version => 20120328131331) do
 
   create_table "addresses", :id => false, :force => true do |t|
     t.string "line_1",                      :null => false
@@ -94,7 +94,12 @@ ActiveRecord::Schema.define(:version => 20120316160813) do
   add_index "theatres", ["name"], :name => "theatres_name_key", :unique => true
 
   create_table "zip_codes", :id => false, :force => true do |t|
-    t.string "zip", :limit => 16, :null => false
+    t.string  "zip",                :limit => 16, :null => false
+    t.string  "city",                             :null => false
+    t.string  "state_abbreviation", :limit => 2,  :null => false
+    t.string  "country",                          :null => false
+    t.decimal "latitude",                         :null => false
+    t.decimal "longitude",                        :null => false
   end
 
 end
