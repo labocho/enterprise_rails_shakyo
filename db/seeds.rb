@@ -34,3 +34,9 @@ end
   zip_code.save!
 end
 
+["MasterCard", "Visa", "AmericanExpress"].each do |type|
+  next if PaymentType.exists?(type: type)
+  payment_type = PaymentType.new
+  payment_type.type = type
+  payment_type.save!
+end

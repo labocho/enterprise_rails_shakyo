@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120328131331) do
+ActiveRecord::Schema.define(:version => 20120330171931) do
 
   create_table "addresses", :id => false, :force => true do |t|
     t.string "line_1",                      :null => false
@@ -65,6 +65,13 @@ ActiveRecord::Schema.define(:version => 20120328131331) do
     t.string  "credit_card_number", :limit => 16
     t.date    "expiration_date",                   :null => false
   end
+
+  create_table "payment_types", :id => false, :force => true do |t|
+    t.integer "id",                  :null => false
+    t.string  "type", :limit => 128, :null => false
+  end
+
+  add_index "payment_types", ["type"], :name => "payment_types_type_key", :unique => true
 
   create_table "purchased_tickets", :id => false, :force => true do |t|
     t.integer "id",                   :null => false

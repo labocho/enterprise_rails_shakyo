@@ -1,0 +1,2 @@
+class MasterCard < PaymentType
+end
